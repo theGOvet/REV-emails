@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Email Generator</title>
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<div class="container">
+  <h2>Email Generator</h2>
+
+  <label>Template:</label>
+  <select id="template">
+    <option value="acceptance">Case Acceptance</option>
+    <option value="betterPhotos">Request Better Photos</option>
+    <option value="followUp">Follow-up</option>
+  </select>
+
+  <label>Referring Vet Name:</label>
+  <input type="text" id="vetName" placeholder="Dr. Smith">
+
+  <label>Pet + Owner:</label>
+  <input type="text" id="petOwner" placeholder="Fluffy Jason">
+
+  <label>Date of Submission:</label>
+  <input type="date" id="submitDate">
+
+  <label>Consultation Type:</label>
+  <select id="consultation">
+    <option value="written">Written report only</option>
+    <option value="call">Phone call only</option>
+    <option value="both">Written + Phone call</option>
+  </select>
+
+  <button onclick="generateEmail()">Generate Email</button>
+
+  <label>Generated Email:</label>
+  <textarea id="result" readonly></textarea>
+  <button onclick="copyEmail()">Copy to Clipboard</button>
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>
