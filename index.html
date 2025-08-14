@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Vet Case Email Generator</title>
+<style>
+  body { font-family: Arial, sans-serif; padding: 20px; }
+  label { display: block; margin-top: 10px; }
+  input, select { margin-top: 5px; width: 300px; padding: 5px; }
+  button { margin-top: 15px; padding: 10px 15px; }
+  textarea { width: 100%; height: 400px; margin-top: 15px; }
+</style>
+</head>
+<body>
+<h2>Vet Case Email Generator</h2>
+
+<label>Referring Vet Name:
+  <input type="text" id="vetName">
+</label>
+
+<label>Case Submission Date:
+  <input type="date" id="submissionDate">
+</label>
+
+<label>Pet Name:
+  <input type="text" id="petName">
+</label>
+
+<label>Owner Name:
+  <input type="text" id="ownerName">
+</label>
+
+<label>Consultation Type:
+  <select id="consultType">
+    <option value="written">Written report only</option>
+    <option value="phone">Phone call only</option>
+    <option value="both">Written + Phone call</option>
+  </select>
+</label>
+
+<button onclick="generateEmail()">Generate Email</button>
+
+<textarea id="outputEmail" readonly></textarea>
+
+<script>
+function addBusinessDays(startDate, days) {
+    let count = 0;
+    let date = new Date(startDate);
+    while (count < days) {
+        date.setDate(date.getDate() + 1);
+        const day = date.getDay();
+        if (day !== 0 && day !== 6) { // skip weekends
+            count++;
+        }
+    }
+    return date;
+}
+
+function formatDate(date) {
+    return date.toLocaleDateString('en-GB', { day: '2-digit', month: 'short', year: 'numeric' });
+}
+
+function generateEmail() {
+    const vet = document.getElementById('vetName').value || "[Referring Vet Name]";
+    const subDate = document.getElementById('submissionDate').value ? new Date(document.getElementById('submissionDate').value) : new Date();
+    const pet = document.getElementById('petName').value || "[Pet Name]";
+    const owner = document.getElementById('ownerName').value || "[Owner Name]";
+    const type = document.getElementById('consultType').value;
+
+    const petOwnerCombo = `${pet} ${owner}`;
+    const deliveryDate = formatDate(addBusinessDays(subDate, 2));
+
+    // Default call options (day after next)
+    let callOption1 = new Date(subDate);
+    callOption1.setDate(callOption1.getDate() + 2);
+    callOption1.setHours(12, 15);
+
+    let callOption2 = new Date(subDate);
+    callOption2.setDate(callOption2.getDate() + 2);
+    callOption2.setHours(19, 30);
+
+    callOption1 = callOption1.toLocaleString('en-GB', { day:'2-digit', month:'short', year:'numeric', hour:'2-digit', minute:'2-digit' });
+    callOption2 = callOption2.toLocaleString('en-GB', { day:'2-digit', month:'short', year:'numeric', hour:'2-digit', minute:'2-digit' });
+
+    const paymentLink = "[Insert link to product]";
+
+    let email = `Subject: Specialist Ophthalmology Consultation – Case Accepted
+
+Dear ${vet},
+
+Thank you for submitting this case.
+After reviewing the information provided, I am pleased to confirm that I can proceed.
+
+Delivery method: ${type === "written" ? "Written report only" : type === "phone" ? "Phone call only" : "Written report + Phone call"}
+
+`;
+
+    if(type === "written" || type === "both") {
+        email += `If “Written report” included:
+
+You will receive your written specialist report within 2 UK business days of payment being received (by ${deliveryDate}).
+
+`;
+    }
+
+    if(type === "phone" || type === "both") {
+        email += `If “Phone call” included:
+
+Please choose from the following available times for the call:
+
+${callOption1}
+${callOption2}
+
+`;
+    }
+
+    email += `Once ${type === "phone" ? "the call time is confirmed / you are ready to proceed" : "you are ready to proceed"}, please complete payment using the link below:
+
+Payment link: ${paymentLink}
+
+Kind regards,
+Francisco Gómez Villasclaras
+Veterinary Ophthalmologist
+Ojo Veterinario`;
+
+    document.getElementById('outputEmail').value = email;
+}
+</script>
+</body>
+</html>
