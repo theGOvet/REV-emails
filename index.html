@@ -64,7 +64,7 @@
 </label>
 
 <button onclick="generateEmail()">Generate Email</button>
-
+<button onclick="copyEmail()">Copy Email to Clipboard</button>
 <textarea id="outputEmail" readonly></textarea>
 
 <script>
@@ -147,6 +147,14 @@ Veterinary Ophthalmologist
 Ojo Veterinario`;
 
     document.getElementById('outputEmail').value = email;
+}
+  function copyEmail() {
+    const emailText = document.getElementById('outputEmail');
+    emailText.select();
+    emailText.setSelectionRange(0, 99999); // For mobile
+    navigator.clipboard.writeText(emailText.value).then(() => {
+        alert("Email copied to clipboard!");
+    });
 }
 </script>
 </body>
