@@ -11,7 +11,8 @@ function generateEmail() {
   const consult = document.getElementById('consultation').value;
   const templateKey = document.getElementById('template').value;
 
-  let template = templates[templateKey];
+  let templateObj = templates[templateKey];
+  let template = templateObj.text;
 
   let writtenSection = (consult === 'written' || consult === 'both') ? 
       "You will receive your written specialist report within 2 UK business days of payment being received.\n\n" : "";
@@ -27,16 +28,23 @@ function generateEmail() {
       callSection = `Please choose from the following available times for the call:\n${dateStr} 12:15 UK time\n${dateStr} 19:30 UK time\n\n`;
   }
 
+  let paymentLink = "";
+  if (templateObj.links) {
+    paymentLink = templateObj.links[consult] || "";
+  }
+
   let email = template
       .replace("{vet}", vet)
       .replace("{pet}", pet)
       .replace("{date}", date)
       .replace("{consult}", consult)
       .replace("{writtenSection}", writtenSection)
-      .replace("{callSection}", callSection);
+      .replace("{callSection}", callSection)
+      .replace("{paymentLink}", paymentLink);
 
   document.getElementById('result').value = email;
 }
+
 
 function copyEmail() {
   const textarea = document.getElementById('result');
