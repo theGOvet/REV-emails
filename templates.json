@@ -1,5 +1,5 @@
 {
-  "acceptance": "Dear {vet},\n\nThank you for submitting this case for {pet} on {date}.\nAfter reviewing the information, I am pleased to confirm I can proceed.\n\nDelivery method: {consult}\n\n{writtenSection}{callSection}Once ready, please complete payment using the link below:\n[https://ojoveterinario.es/remote-payment-report/p/written-report-payment]\n\nKind regards,\nFrancisco Gómez Villasclaras\nVeterinary Ophthalmologist\nOjo Veterinario",
+  "acceptance": "Dear {vet},\n\nThank you for submitting this case for {pet} on {date}.\nAfter reviewing the information, I am pleased to confirm I can proceed.\n\nDelivery method: {consult}\n\n{writtenSection}{callSection}Once ready, please complete payment using the link below:\n[https://ojoveterinario.es/remote-payment-report/p/written-report-payment][https://ojoveterinario.es/remote-payment-call/p/scheduled-phone-call]\n\nKind regards,\nFrancisco Gómez Villasclaras\nVeterinary Ophthalmologist\nOjo Veterinario",
   
   "betterPhotos": "I have reviewed the submitted images for {pet} on {date}.\nTo proceed, I would require clearer photos. Please submit updated images at your earliest convenience.\n\nKind regards,\nFrancisco Gómez Villasclaras\nVeterinary Ophthalmologist\nOjo Veterinario",
   
