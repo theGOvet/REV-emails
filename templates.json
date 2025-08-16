@@ -2,8 +2,8 @@
   "acceptance": {
     "text": "Dear {vet},\n\nThank you for submitting this case for {pet} on {date}.\nAfter reviewing the information, I am pleased to confirm I can proceed.\n\nDelivery method: {consult}\n\n{writtenSection}{callSection}Once ready, please complete payment using the link below:\n{paymentLink}\n\nKind regards,\nFrancisco Gómez Villasclaras\nVeterinary Ophthalmologist\nOjo Veterinario",
     "links": {
-      "written": "https://pay.example.com/written",
-      "call": "https://pay.example.com/call",
+      "written": "https://ojoveterinario.es/remote-payment-report/p/written-report-payment",
+      "call": "https://ojoveterinario.es/remote-payment-call/p/scheduled-phone-call",
       "both": "https://pay.example.com/both"
     }
   },
